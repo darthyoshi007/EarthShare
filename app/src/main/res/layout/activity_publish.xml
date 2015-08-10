@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/map">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:id="@+id/Layer1">
+
+    <EditText
+        android:id="@+id/full_name"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:hint="Full Name"
+        android:inputType="text"
+        android:textColor="#ffffffff"
+        android:layout_marginTop="15dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <EditText
+                android:id="@+id/street_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Street #"
+                android:inputType="number"
+                android:textColor="#ffffffff"
+                android:layout_marginTop="20dp"/>
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="numberPassword"
+                android:ems="10"
+                android:id="@+id/editText"
+                android:layout_weight="1" />
+
+            <EditText
+                android:id="@+id/street_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Street Name"
+                android:inputType="text"
+                android:textColor="#ffffffff"
+                android:layout_marginTop="20dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <EditText
+                android:id="@+id/city"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="City"
+                android:inputType="text"
+                android:textColor="#ffffffff"
+                android:layout_marginTop="15dp" />
+            <EditText
+                android:id="@+id/state"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="State"
+                android:inputType="text"
+                android:textColor="#ffffffff"
+                android:layout_marginTop="15dp"/>
+            <EditText
+                android:id="@+id/zip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Zip"
+                android:inputType="number"
+                android:textColor="#ffffffff"
+                android:layout_marginTop="15dp"/>
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Services Offered"
+            android:textSize="25sp"
+            android:textColor="#ffa0d9f3"
+            android:layout_marginTop="20dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <Switch
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Refuge    "
+                android:textSize="20sp"
+                android:id="@+id/refuge"
+                android:layout_marginTop="15dp"/>
+
+            <Switch
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Medical  "
+                android:textSize="20sp"
+                android:id="@+id/medical"
+                android:layout_marginTop="15dp"/>
+
+            <Switch
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Food       "
+                android:textSize="20sp"
+                android:id="@+id/food"
+                android:layout_marginTop="15dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Status"
+                android:textSize="25sp"
+                android:layout_marginTop="15dp"
+                android:textColor="#ffa0d9f3"/>
+
+            <Spinner
+                android:id="@+id/planets_spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp" />
+
+        </LinearLayout>
+
+        <EditText
+        android:id="@+id/details"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:hint="Details"
+        android:inputType="text"
+        android:textColor="#ffffffff"
+        />
+
+    </LinearLayout>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Submit"
+        android:id="@+id/submit_button"
+        android:layout_gravity="center_horizontal"
+        android:textColor="#ffa0d9f3"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:layout_marginTop="10dp"
+        android:textSize="25sp" />
+
+    <!--<Button-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Submit"-->
+        <!--android:id="@+id/submit_button"-->
+        <!--android:background="@android:color/transparent"-->
+        <!--android:gravity="center"-->
+        <!--android:textSize="25sp"-->
+        <!--android:layout_marginTop="20dp"-->
+        <!--android:textColor="#ffa0d9f3"-->
+        <!--android:textStyle="bold" />-->
+
+</LinearLayout>

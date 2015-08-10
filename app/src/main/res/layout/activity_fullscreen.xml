@@ -1,0 +1,27 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:background="#ff242426"
+    tools:context=".FullscreenActivity">
+
+
+    <TextView android:id="@+id/fullscreen_content" android:layout_width="match_parent"
+        android:layout_height="match_parent" android:keepScreenOn="true"
+        android:gravity="center"
+        android:text=" " />
+
+    <android.support.v4.view.ViewPager xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v4.view.PagerTabStrip
+            android:id="@+id/pager_title_strip"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:layout_gravity="top"
+            android:textAppearance="@style/PagerTabStripText"/>
+
+    </android.support.v4.view.ViewPager>
+
+
+</FrameLayout>

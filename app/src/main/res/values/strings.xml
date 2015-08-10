@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">EarthShare</string>
+
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+
+    <string-array name="planets_array">
+        <item>Safe</item>
+        <item>Injury</item>
+        <item>Fatality</item>
+        <item>Damaged Structure</item>
+        <item>Neutral</item>
+    </string-array>
+
+</resources>
