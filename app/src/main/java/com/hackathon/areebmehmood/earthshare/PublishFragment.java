@@ -15,6 +15,8 @@ import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 /**
  * Created by Areeb Mehmood on 8/8/2015.
  */
@@ -39,10 +41,10 @@ public class PublishFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.activity_publish, container, false);
 
         Spinner spinner = (Spinner) rootView.findViewById(R.id.planets_spinner);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),R.array.planets_array, android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(), R.array.planets_array, android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
 
-        submitButton = (Button)rootView.findViewById(R.id.submit_button);
+        submitButton = (Button) rootView.findViewById(R.id.submit_button);
 
         name = (EditText) rootView.findViewById(R.id.full_name);
         street_number = (EditText) rootView.findViewById(R.id.street_number);
@@ -61,7 +63,7 @@ public class PublishFragment extends Fragment {
         submitButton.setOnClickListener(
                 new View.OnClickListener() {
                     public void onClick(View view) {
-//                        name.setText(null);
+                        StringBuilder address = new StringBuilder();
                         name.setHint("Full Name");
                         street_number.setHint("Street #");
                         street_name.setHint("Street name");
@@ -69,10 +71,17 @@ public class PublishFragment extends Fragment {
                         state.setHint("State");
                         zip.setHint("ZIP");
                         details.setHint("Details");
-                        refuge.setChecked(pref.getBoolean("check", false));
-                        medical.setChecked(pref.getBoolean("check", false));
-                        food.setChecked(pref.getBoolean("check", false));
-                        ((FullscreenActivity) getActivity()).onButtonClicked("" + name.getText(), street_number.getText() + " " + street_name.getText() + " " + city.getText() + " " + state.getText() + " " + zip.getText(), "" + details.getText());
+                        if (street_number.getText().toString() != null)
+                            address.append(street_number.getText().toString());
+                        if (street_name.getText().toString() != null)
+                            address.append(street_name.getText().toString());
+                        if (city.getText().toString() != null)
+                            address.append(city.getText().toString());
+                        if (state.getText().toString() != null)
+                            address.append(state.getText().toString());
+                        if (zip.getText().toString() != null)
+                            address.append(zip.getText().toString());
+                        ((FullscreenActivity) getActivity()).onButtonClicked(name.getText().toString(), address.toString(), details.getText().toString(), refuge.isChecked(), medical.isChecked(), food.isChecked());
                         name.setText(null);
                         street_number.setText(null);
                         street_name.setText(null);
@@ -80,6 +89,9 @@ public class PublishFragment extends Fragment {
                         zip.setText(null);
                         details.setText(null);
                         state.setText(null);
+                        refuge.setChecked(false);
+                        medical.setChecked(false);
+                        food.setChecked(false);
                     }
                 });
 

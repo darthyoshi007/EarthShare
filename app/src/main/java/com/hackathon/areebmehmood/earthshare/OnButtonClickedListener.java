@@ -6,5 +6,5 @@ import com.google.android.gms.maps.model.LatLng;
  * Created by doshi on 8/11/2015.
  */
 public interface OnButtonClickedListener {
-    public void onButtonClicked(String name, String address, String details);
+    public void onButtonClicked(String name, String address, String details, boolean refuge, boolean medical, boolean food);
 }

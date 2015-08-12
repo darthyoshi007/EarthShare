@@ -1,10 +1,14 @@
 package com.hackathon.areebmehmood.earthshare;
 
+import android.app.Dialog;
+import android.app.DialogFragment;
+import android.content.DialogInterface;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +34,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class MapFragment extends Fragment {
@@ -42,7 +47,7 @@ public class MapFragment extends Fragment {
     private Button homeButton;
     private Button medicalButton;
 
-    private ArrayList<Marker> markers = new ArrayList<Marker>();
+//    private ArrayList<Marker> markers = new ArrayList<Marker>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -84,30 +89,74 @@ public class MapFragment extends Fragment {
                     }
                 });
         if (!refuge) {
-            for (Marker m : markers) {
-                if (m.getTitle().contains("refuge")) {
-                    m.setVisible(false);
+            if (markers.get("refuge") != null) {
+                for (Marker m : markers.get("refuge")) {
+                    if (m.getTitle().contains("refuge")) {
+                        m.setVisible(false);
+                    }
+                }
+            }
+        }
+        if (refuge) {
+            if (markers.get("refuge") != null) {
+                for (Marker m : markers.get("refuge")) {
+                    if (m.getTitle().contains("refuge")) {
+                        m.setVisible(true);
+                    }
                 }
             }
         }
         if (!medical) {
-            for (Marker m : markers) {
-                if (m.getTitle().contains("Medical")) {
-                    m.setVisible(false);
+            if (markers.get("medical") != null) {
+                for (Marker m : markers.get("medical")) {
+                    if (m.getTitle().contains("Medical")) {
+                        m.setVisible(false);
+                    }
+                }
+            }
+        }
+        if (medical) {
+            if (markers.get("medical") != null) {
+                for (Marker m : markers.get("medical")) {
+                    if (m.getTitle().contains("Medical")) {
+                        m.setVisible(true);
+                    }
                 }
             }
         }
         if (!food) {
-            for (Marker m : markers) {
-                if (m.getTitle().contains("Food")) {
-                    m.setVisible(false);
+            if (markers.get("food") != null) {
+                for (Marker m : markers.get("food")) {
+                    if (m.getTitle().contains("Food")) {
+                        m.setVisible(false);
+                    }
+                }
+            }
+        }
+        if (food) {
+            if (markers.get("food") != null) {
+                for (Marker m : markers.get("food")) {
+                    if (m.getTitle().contains("Food")) {
+                        m.setVisible(true);
+                    }
                 }
             }
         }
         if (!home) {
-            for (Marker m : markers) {
-                if (m.getTitle().contains("Home")) {
-                    m.setVisible(false);
+            if (markers.get("home") != null) {
+                for (Marker m : markers.get("home")) {
+                    if (m.getTitle().contains("Home")) {
+                        m.setVisible(false);
+                    }
+                }
+            }
+        }
+        if (home) {
+            if (markers.get("home") != null) {
+                for (Marker m : markers.get("home")) {
+                    if (m.getTitle().contains("Home")) {
+                        m.setVisible(true);
+                    }
                 }
             }
         }
@@ -170,17 +219,74 @@ public class MapFragment extends Fragment {
         return p1;
     }
 
-    public void addMarker(String address, String name, String details) {
+//    public static class noSuchAddressFragment extends DialogFragment{
+//        @Override
+//        public Dialog onCreateDialog(Bundle savedInstanceState) {
+//            // Use the Builder class for convenient dialog construction
+//            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+//            builder.setMessage("Enter a proper address!").setNegativeButton("Ok", new DialogInterface.OnClickListener() {
+//                        public void onClick(DialogInterface dialog, int id) {
+//                            // User cancelled the dialog
+//                        }
+//                    });
+//            // Create the AlertDialog object and return it
+//            return builder.create();
+//        }
+//    }
+
+    HashMap<String, ArrayList<Marker>> markers = new HashMap<String, ArrayList<Marker>>();
+    public boolean addMarker(String address, String name, String details, boolean refuge, boolean medical, boolean food) {
         LatLng latLong = getLocationFromAddress(address);
+        if (latLong == null){
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            builder.setTitle("Address").setMessage("Please enter a valid address.").setNegativeButton("Ok", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+
+                }
+            });
+            builder.create().show();
+            return false;
+        }
         MarkerOptions marker = new MarkerOptions().position(
                 new LatLng(latLong.latitude, latLong.longitude)).title(name + " | " + details);
         marker.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
         Marker m = googleMap.addMarker(marker);
-        markers.add(m);
+        if (refuge && markers.get("refuge") != null){
+            ArrayList<Marker> refuges = new ArrayList<Marker>();
+            refuges = markers.get("refuge");
+            refuges.add(m);
+            markers.put("refuge", refuges);
+        } else if (refuge) {
+            ArrayList<Marker> refuges = new ArrayList<Marker>();
+            refuges.add(m);
+            markers.put("refuge", refuges);
+        }
+        if (medical && markers.get("medical") != null){
+            ArrayList<Marker> medicals = new ArrayList<Marker>();
+            medicals = markers.get("medical");
+            medicals.add(m);
+            markers.put("medical", medicals);
+        } else if (medical) {
+            ArrayList<Marker> medicals = new ArrayList<Marker>();
+            medicals.add(m);
+            markers.put("medical", medicals);
+        }
+        if (food && markers.get("food") != null){
+            ArrayList<Marker> foods = new ArrayList<Marker>();
+            foods = markers.get("food");
+            foods.add(m);
+            markers.put("food", foods);
+        } else if (food) {
+            ArrayList<Marker> foods = new ArrayList<Marker>();
+            foods.add(m);
+            markers.put("food", foods);
+        }
         CameraPosition cameraPosition = new CameraPosition.Builder()
                 .target(latLong).zoom(12).build();
         googleMap.animateCamera(CameraUpdateFactory
                 .newCameraPosition(cameraPosition));
+        return true;
     }
 
     private DataStruct[] downloadContent(String myurl) throws IOException {

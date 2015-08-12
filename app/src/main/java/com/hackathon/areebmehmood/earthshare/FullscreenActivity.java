@@ -38,60 +38,61 @@ public class FullscreenActivity extends FragmentActivity implements OnButtonClic
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fullscreen);
 
-        UiChangeListener();
+//        UiChangeListener();
 
         mAdapter = new MyAdapter(getSupportFragmentManager());
         mPager = (ViewPager) findViewById(R.id.pager);
         mPager.setAdapter(mAdapter);
 
-        final View controlsView = findViewById(R.id.full_name);
-        final View contentView = findViewById(R.id.fullscreen_content);
-
-        mSystemUiHider = SystemUiHider.getInstance(this, contentView, HIDER_FLAGS);
-        mSystemUiHider.setup();
-        mSystemUiHider
-                .setOnVisibilityChangeListener(new SystemUiHider.OnVisibilityChangeListener() {
-                    // Cached values.
-                    int mControlsHeight;
-                    int mShortAnimTime;
-
-                    @Override
-                    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-                    public void onVisibilityChange(boolean visible) {
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-
-                            if (mShortAnimTime == 0) {
-                                mShortAnimTime = getResources().getInteger(
-                                        android.R.integer.config_shortAnimTime);
-                            }
-                        } else {
-                            controlsView.setVisibility(visible ? View.VISIBLE : View.GONE);
-                        }
-
-                        if (visible && AUTO_HIDE) {
-                            delayedHide(AUTO_HIDE_DELAY_MILLIS);
-                        }
-                    }
-                });
+//        final View controlsView = findViewById(R.id.full_name);
+//        final View contentView = findViewById(R.id.fullscreen_content);
+//
+//        mSystemUiHider = SystemUiHider.getInstance(this, contentView, HIDER_FLAGS);
+//        mSystemUiHider.setup();
+//        mSystemUiHider
+//                .setOnVisibilityChangeListener(new SystemUiHider.OnVisibilityChangeListener() {
+//                    // Cached values.
+//                    int mControlsHeight;
+//                    int mShortAnimTime;
+//
+//                    @Override
+//                    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+//                    public void onVisibilityChange(boolean visible) {
+//                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//
+//                            if (mShortAnimTime == 0) {
+//                                mShortAnimTime = getResources().getInteger(
+//                                        android.R.integer.config_shortAnimTime);
+//                            }
+//                        } else {
+//                            controlsView.setVisibility(visible ? View.VISIBLE : View.GONE);
+//                        }
+//
+//                        if (visible && AUTO_HIDE) {
+//                            delayedHide(AUTO_HIDE_DELAY_MILLIS);
+//                        }
+//                    }
+//                });
     }
 
-    public void UiChangeListener()
-    {
-        final View decorView = getWindow().getDecorView();
-        decorView.setSystemUiVisibility(
-                View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                        | View.SYSTEM_UI_FLAG_FULLSCREEN
-                        | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
-    }
+//    public void UiChangeListener()
+//    {
+//        final View decorView = getWindow().getDecorView();
+//        decorView.setSystemUiVisibility(
+//                View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+//                        | View.SYSTEM_UI_FLAG_FULLSCREEN
+//                        | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+//    }
 
 
     static MapFragment m = new MapFragment();
     static PublishFragment p = new PublishFragment();
 
     @Override
-    public void onButtonClicked(String name, String address, String details) {
-        mPager.setCurrentItem(0); //smooth scroll isnt smooth idk why
-        m.addMarker(address, name, details);
+    public void onButtonClicked(String name, String address, String details, boolean refuge, boolean medical, boolean food) {
+        if (m.addMarker(address, name, details, refuge, medical, food)) {
+            mPager.setCurrentItem(0); //smooth scroll isnt smooth idk why
+        }
     }
 
     public static class MyAdapter extends FragmentPagerAdapter
@@ -131,17 +132,17 @@ public class FullscreenActivity extends FragmentActivity implements OnButtonClic
         }
     }
 
-    Handler mHideHandler = new Handler();
-    Runnable mHideRunnable = new Runnable() {
-        @Override
-        public void run() {
-            mSystemUiHider.hide();
-        }
-    };
+//    Handler mHideHandler = new Handler();
+//    Runnable mHideRunnable = new Runnable() {
+//        @Override
+//        public void run() {
+//            mSystemUiHider.hide();
+//        }
+//    };
 
-    private void delayedHide(int delayMillis) {
-        mHideHandler.removeCallbacks(mHideRunnable);
-        mHideHandler.postDelayed(mHideRunnable, delayMillis);
-    }
+//    private void delayedHide(int delayMillis) {
+//        mHideHandler.removeCallbacks(mHideRunnable);
+//        mHideHandler.postDelayed(mHideRunnable, delayMillis);
+//    }
 
 }
