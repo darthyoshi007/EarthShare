@@ -72,8 +72,14 @@ public class PublishFragment extends Fragment {
                         refuge.setChecked(pref.getBoolean("check", false));
                         medical.setChecked(pref.getBoolean("check", false));
                         food.setChecked(pref.getBoolean("check", false));
-//                        Toast.makeText(getActivity(), , Toast.LENGTH_LONG).show();
                         ((FullscreenActivity) getActivity()).onButtonClicked("" + name.getText(), street_number.getText() + " " + street_name.getText() + " " + city.getText() + " " + state.getText() + " " + zip.getText(), "" + details.getText());
+                        name.setText(null);
+                        street_number.setText(null);
+                        street_name.setText(null);
+                        city.setText(null);
+                        zip.setText(null);
+                        details.setText(null);
+                        state.setText(null);
                     }
                 });
 

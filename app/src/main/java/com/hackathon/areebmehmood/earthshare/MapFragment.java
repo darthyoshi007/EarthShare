@@ -53,10 +53,10 @@ public class MapFragment extends Fragment {
 
         mMapView.onResume();// needed to get the map to display immediately
 
-        refugeButton = (Button)rootView.findViewById(R.id.refuge_button);
-        foodButton = (Button)rootView.findViewById(R.id.food_button);
-        homeButton = (Button)rootView.findViewById(R.id.home_button);
-        medicalButton = (Button)rootView.findViewById(R.id.medical_button);
+        refugeButton = (Button) rootView.findViewById(R.id.refuge_button);
+        foodButton = (Button) rootView.findViewById(R.id.food_button);
+        homeButton = (Button) rootView.findViewById(R.id.home_button);
+        medicalButton = (Button) rootView.findViewById(R.id.medical_button);
 
 
         refugeButton.setOnClickListener(
@@ -83,30 +83,30 @@ public class MapFragment extends Fragment {
                         medical = !medical;
                     }
                 });
-        if (!refuge){
-            for (Marker m : markers){
-                if (m.getTitle().contains("refuge")){
+        if (!refuge) {
+            for (Marker m : markers) {
+                if (m.getTitle().contains("refuge")) {
                     m.setVisible(false);
                 }
             }
         }
-        if (!medical){
-            for (Marker m : markers){
-                if (m.getTitle().contains("Medical")){
+        if (!medical) {
+            for (Marker m : markers) {
+                if (m.getTitle().contains("Medical")) {
                     m.setVisible(false);
                 }
             }
         }
-        if (!food){
-            for (Marker m : markers){
-                if (m.getTitle().contains("Food")){
+        if (!food) {
+            for (Marker m : markers) {
+                if (m.getTitle().contains("Food")) {
                     m.setVisible(false);
                 }
             }
         }
-        if (!home){
-            for (Marker m : markers){
-                if (m.getTitle().contains("Home")){
+        if (!home) {
+            for (Marker m : markers) {
+                if (m.getTitle().contains("Home")) {
                     m.setVisible(false);
                 }
             }
@@ -133,14 +133,14 @@ public class MapFragment extends Fragment {
         StrictMode.setThreadPolicy(policy);
         try {
             makeQuakes(downloadContent("http://earthquake.usgs.gov/fdsnws/event/1/query?format=text&limit=500"));
-        } catch (IOException e){
+        } catch (IOException e) {
 
         }
 
-    return rootView;
+        return rootView;
     }
 
-    public void makeQuakes(DataStruct[] eartQuake){
+    public void makeQuakes(DataStruct[] eartQuake) {
         for (DataStruct d : eartQuake) {
             if (d != null) {
                 MarkerOptions marker = new MarkerOptions().position(
@@ -164,7 +164,9 @@ public class MapFragment extends Fragment {
             location.getLatitude();
             location.getLongitude();
             p1 = new LatLng(location.getLatitude(), location.getLongitude());
-        } catch (Exception ex) {ex.printStackTrace();}
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
         return p1;
     }
 
@@ -177,8 +179,7 @@ public class MapFragment extends Fragment {
         markers.add(m);
         CameraPosition cameraPosition = new CameraPosition.Builder()
                 .target(latLong).zoom(12).build();
-        if (details.contains("home"))
-            googleMap.animateCamera(CameraUpdateFactory
+        googleMap.animateCamera(CameraUpdateFactory
                 .newCameraPosition(cameraPosition));
     }
 
@@ -203,11 +204,11 @@ public class MapFragment extends Fragment {
             int DATA_COUNT = 30;
             DataStruct[] eartQuake = new DataStruct[50];
 
-            for (int i = 1; i < arrString.length; i++){
+            for (int i = 1; i < arrString.length; i++) {
                 String[] data = arrString[i].split("\\|");
-                if(entryNumber >=  DATA_COUNT - 1) break;
+                if (entryNumber >= DATA_COUNT - 1) break;
                 entryNumber++;
-                if(data.length >12) {
+                if (data.length > 12) {
                     eartQuake[entryNumber] = new DataStruct(data[1], data[2], data[3], data[10], data[12]);
                 }
             }
@@ -224,7 +225,8 @@ public class MapFragment extends Fragment {
     class DataStruct {
 
         String longitude, latitude, magnitude, time, name;
-        public DataStruct(String time, String latitude, String longitude, String magnitude, String name){
+
+        public DataStruct(String time, String latitude, String longitude, String magnitude, String name) {
             this.longitude = longitude;
             this.latitude = latitude;
             this.magnitude = magnitude;

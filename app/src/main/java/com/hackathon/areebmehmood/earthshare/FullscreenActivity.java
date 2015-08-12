@@ -90,6 +90,7 @@ public class FullscreenActivity extends FragmentActivity implements OnButtonClic
 
     @Override
     public void onButtonClicked(String name, String address, String details) {
+        mPager.setCurrentItem(0); //smooth scroll isnt smooth idk why
         m.addMarker(address, name, details);
     }
 
