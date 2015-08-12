@@ -63,31 +63,24 @@ public class MapFragment extends Fragment {
                 new View.OnClickListener() {
                     public void onClick(View view) {
                         refuge = !refuge;
-                        addMarker("250 Hamilton Ave Palo Alto CA 94301", "City of Palo Alto City Hall", "Refuge");
-                        addMarker("1276 Harriet St Palo Alto CA 94301", "Children's Library", "Refuge");
-
                     }
                 });
         foodButton.setOnClickListener(
                 new View.OnClickListener() {
                     public void onClick(View view) {
                         food = !food;
-                        addMarker("2400 Stevenson Boulevard Fremont CA 94538", "Fremont Main Library", "Food");
                     }
                 });
         homeButton.setOnClickListener(
                 new View.OnClickListener() {
                     public void onClick(View view) {
                         home = !home;
-                        addMarker("151 University Avenue Palo Alto California 94301", "Home - EarthShare", "Free Food :)");
                     }
                 });
         medicalButton.setOnClickListener(
                 new View.OnClickListener() {
                     public void onClick(View view) {
                         medical = !medical;
-                        addMarker("725 Welch Rd Palo Alto CA 94304", "Lucile Packard Children's Hospital", "Medical");
-                        addMarker("900 Hyde St San Francisco CA 94109", "Saint Francis Memorial Hospital", "Medical");
                     }
                 });
         if (!refuge){

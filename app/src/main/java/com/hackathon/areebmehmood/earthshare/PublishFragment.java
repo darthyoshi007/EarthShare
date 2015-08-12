@@ -1,5 +1,6 @@
 package com.hackathon.areebmehmood.earthshare;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -60,25 +61,19 @@ public class PublishFragment extends Fragment {
         submitButton.setOnClickListener(
                 new View.OnClickListener() {
                     public void onClick(View view) {
-                        name.setText(null);
+//                        name.setText(null);
                         name.setHint("Full Name");
-                        street_number.setText(null);
                         street_number.setHint("Street #");
-                        street_name.setText(null);
                         street_name.setHint("Street name");
-                        city.setText(null);
                         city.setHint("City");
-                        state.setText(null);
                         state.setHint("State");
-                        zip.setText(null);
                         zip.setHint("ZIP");
-                        details.setText(null);
                         details.setHint("Details");
                         refuge.setChecked(pref.getBoolean("check", false));
-                        medical.setChecked(pref.getBoolean("check",false));
-                        food.setChecked(pref.getBoolean("check",false));
-                        Toast.makeText(getActivity(), "Data Submitted",
-                                Toast.LENGTH_LONG).show();
+                        medical.setChecked(pref.getBoolean("check", false));
+                        food.setChecked(pref.getBoolean("check", false));
+//                        Toast.makeText(getActivity(), , Toast.LENGTH_LONG).show();
+                        ((FullscreenActivity) getActivity()).onButtonClicked("" + name.getText(), street_number.getText() + " " + street_name.getText() + " " + city.getText() + " " + state.getText() + " " + zip.getText(), "" + details.getText());
                     }
                 });
 

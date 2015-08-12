@@ -10,7 +10,9 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
+import android.widget.Toast;
 
+import com.google.android.gms.maps.model.LatLng;
 import com.hackathon.areebmehmood.earthshare.util.SystemUiHider;
 
 
@@ -20,7 +22,7 @@ import com.hackathon.areebmehmood.earthshare.util.SystemUiHider;
  *
  * @see SystemUiHider
  */
-public class FullscreenActivity extends FragmentActivity
+public class FullscreenActivity extends FragmentActivity implements OnButtonClickedListener
 {
     MyAdapter mAdapter;
     ViewPager mPager;
@@ -54,9 +56,9 @@ public class FullscreenActivity extends FragmentActivity
                     int mShortAnimTime;
 
                     @Override
-                    @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
+                    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
                     public void onVisibilityChange(boolean visible) {
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 
                             if (mShortAnimTime == 0) {
                                 mShortAnimTime = getResources().getInteger(
@@ -83,6 +85,14 @@ public class FullscreenActivity extends FragmentActivity
     }
 
 
+    static MapFragment m = new MapFragment();
+    static PublishFragment p = new PublishFragment();
+
+    @Override
+    public void onButtonClicked(String name, String address, String details) {
+        m.addMarker(address, name, details);
+    }
+
     public static class MyAdapter extends FragmentPagerAdapter
     {
         public MyAdapter(FragmentManager frag) {
@@ -95,10 +105,10 @@ public class FullscreenActivity extends FragmentActivity
             Fragment fragment = null;
             switch (position) {
                 case 0: {
-                    fragment = new MapFragment();
+                    fragment = m;
                     break;}
                 case 1: {
-                    fragment = new PublishFragment();
+                    fragment = p;
                     break;}
             }
             return  fragment;
